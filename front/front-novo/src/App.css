@@ -1,0 +1,154 @@
+/* ===== 1. VARIÁVEIS DE COR E CONFIGURAÇÕES GLOBAIS ===== */
+:root {
+  --roxo-principal: #7c3aed;
+  --roxo-escuro: #4c1d95;
+  --roxo-claro: #c4b5fd;
+  --roxo-muito-claro: #f5f3ff;
+  --cor-texto: #1e1b4b;
+  --cor-fundo: var(--roxo-muito-claro);
+  --cor-branco: #ffffff;
+  --cor-erro: #ef4444;
+  --sombra: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --border-radius: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto); line-height: 1.6; }
+.container { max-width: 900px; margin: 2rem auto; padding: 2rem; background-color: var(--cor-branco); border-radius: var(--border-radius); box-shadow: var(--sombra); text-align: left; }
+h1, h2 { color: var(--roxo-escuro); margin-bottom: 1rem; }
+h1 { font-size: 2.5rem; }
+h2 { font-size: 1.8rem; }
+
+/* ===== 2. NAVEGAÇÃO ===== */
+.main-nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background-color: var(--cor-branco); box-shadow: var(--sombra); }
+.main-nav h1 { margin: 0; font-size: 1.5rem; }
+.nav-right { display: flex; align-items: center; gap: 1.5rem; }
+.nav-links { display: flex; align-items: center; gap: 1.5rem; }
+.nav-links a { text-decoration: none; color: var(--roxo-principal); font-weight: 500; padding-bottom: 0.25rem; border-bottom: 2px solid transparent; transition: all 0.2s; }
+.nav-links a:hover { color: var(--roxo-escuro); border-bottom-color: var(--roxo-escuro); }
+.welcome-message { color: var(--roxo-escuro); font-weight: 500; white-space: nowrap; }
+.header-actions { display: flex; align-items: center; gap: 1rem; }
+
+/* ===== 3. MENU HAMBÚRGUER (VERSÃO FINAL GARANTIDA) ===== */
+.hamburger-button, .close-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+.hamburger-button { color: var(--roxo-escuro); }
+.close-menu-button { color: var(--cor-texto); position: absolute; top: 1rem; right: 1.5rem; }
+
+@media (max-width: 768px) {
+  .hamburger-button { display: block; }
+  
+  /* ESCONDE os links e a saudação no header principal do mobile, mas NÃO o container */
+  .nav-right > .nav-links {
+    display: none;
+  }
+  
+  /* ESTILIZA o container que será o menu lateral */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: var(--cor-branco);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    display: flex; /* Mantém o flex, mas muda a direção */
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5rem 2rem 2rem;
+    gap: 1.5rem;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* QUANDO ABERTO, o menu desliza e o botão de fechar aparece */
+  .nav-links.open {
+    transform: translateX(0);
+    display: flex; /* Garante que ele seja visível */
+  }
+  .nav-links.open .close-menu-button { display: block; }
+}
+
+/* ===== OUTROS ESTILOS (FORMULÁRIOS, BOTÕES, TABELAS) ===== */
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; font-weight: 600; margin-bottom: 0.5rem; }
+.form-group input, .form-group select { width: 100%; padding: 0.8rem; border: 1px solid var(--roxo-claro); border-radius: var(--border-radius); font-size: 1rem; transition: border-color 0.2s, box-shadow 0.2s; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: var(--roxo-principal); box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2); }
+.form-actions { display: flex; gap: 1rem; margin-top: 2rem; }
+button, .btn-novo, .btn-editar, .btn-voltar { display: inline-block; padding: 0.8rem 1.5rem; border-radius: var(--border-radius); border: none; font-size: 1rem; font-weight: 600; cursor: pointer; text-align: center; text-decoration: none; transition: background-color 0.2s, transform 0.2s; }
+button:hover, .btn-novo:hover, .btn-editar:hover, .btn-voltar:hover { transform: translateY(-2px); }
+button[type="submit"], .btn-novo { background-color: rgb(35, 205, 35); color: var(--cor-branco); }
+button[type="submit"]:hover, .btn-novo:hover { background-color: green; }
+.btn-excluir, .btn-logout { background-color: var(--cor-erro); color: var(--cor-branco); }
+.btn-voltar, .btn-editar, button[type="button"] { background-color: #eee; color: var(--cor-texto); border: 1px solid var(--roxo-claro); }
+table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
+th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--roxo-claro); }
+thead { background-color: var(--roxo-muito-claro); }
+th { font-weight: 600; color: var(--roxo-escuro); }
+tbody tr:hover { background-color: var(--roxo-muito-claro); }
+td.acoes { display: flex; gap: 0.5rem; }
+.disciplinas-container { display: flex; justify-content: space-between; gap: 2rem; margin-top: 2rem; }
+@media (max-width: 768px) { .disciplinas-container { flex-direction: column; } }
+.disciplina-lista { flex: 1; background-color: var(--roxo-muito-claro); padding: 1.5rem; border-radius: var(--border-radius); }
+.disciplina-lista ul { list-style-type: none; }
+.disciplina-lista li { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background-color: var(--cor-branco); margin-bottom: 0.5rem; border-radius: var(--border-radius); box-shadow: var(--sombra); }
+.login-container { max-width: 450px; margin-top: 5rem; }
+
+
+.icon-voltar {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+}
+
+
+/* ===== ESTILOS PARA A PÁGINA DE LOGIN RESPONSIVA ===== */
+
+.login-page-container {
+  display: flex;
+  min-height: 100vh; 
+}
+
+.login-image-side {
+  flex-basis: 50%;
+  background-color: var(--roxo-claro); 
+}
+
+.login-image-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.login-form-side {
+  flex-basis: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.login-form-wrapper {
+  width: 100%;
+  max-width: 400px; 
+}
+
+
+/* --- RESPONSIVIDADE --- */
+
+@media (max-width: 768px) {
+  
+  .login-image-side {
+    display: none;
+  }
+  
+  .login-form-side {
+    flex-basis: 100%;
+  }
+}
